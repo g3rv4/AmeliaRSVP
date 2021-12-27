@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmeliaRSVP.Core", "AmeliaRSVP.Core\AmeliaRSVP.Core.csproj", "{3B6C42E0-46FB-44DE-A8DB-6F67663A519E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmeliaRSVP.Web", "AmeliaRSVP.Web\AmeliaRSVP.Web.csproj", "{AA2C5226-FE66-40F5-8E1F-41E99C1BE596}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmeliaRSVP.Cli", "AmeliaRSVP.Cli\AmeliaRSVP.Cli.csproj", "{12DBFE68-E0FA-4135-80EF-9ADAB79C131B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B6C42E0-46FB-44DE-A8DB-6F67663A519E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B6C42E0-46FB-44DE-A8DB-6F67663A519E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B6C42E0-46FB-44DE-A8DB-6F67663A519E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B6C42E0-46FB-44DE-A8DB-6F67663A519E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA2C5226-FE66-40F5-8E1F-41E99C1BE596}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA2C5226-FE66-40F5-8E1F-41E99C1BE596}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA2C5226-FE66-40F5-8E1F-41E99C1BE596}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA2C5226-FE66-40F5-8E1F-41E99C1BE596}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12DBFE68-E0FA-4135-80EF-9ADAB79C131B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12DBFE68-E0FA-4135-80EF-9ADAB79C131B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12DBFE68-E0FA-4135-80EF-9ADAB79C131B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12DBFE68-E0FA-4135-80EF-9ADAB79C131B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
