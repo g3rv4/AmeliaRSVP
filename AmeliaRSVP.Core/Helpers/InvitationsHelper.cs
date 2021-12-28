@@ -8,13 +8,17 @@ namespace AmeliaRSVP.Core.Helpers;
 
 public class InvitationsHelper
 {
-    private static readonly ImmutableArray<string> _fieldsToUpdate = new[]
+    private static readonly ImmutableArray<string> _fieldsToUpdateResponse = new[]
     {
         nameof(Invitation.Response),
         nameof(Invitation.ConfirmedAdults),
         nameof(Invitation.ConfirmedKids),
         nameof(Invitation.ConfirmedBabies),
         nameof(Invitation.LastRSVP),
+    }.ToImmutableArray();
+    
+    private static readonly ImmutableArray<string> _fieldsToUpdateWhatsapp = new[]
+    {
         nameof(Invitation.WhatsAppNumbersDSent),
         nameof(Invitation.WhatsAppNumbersGSent),
     }.ToImmutableArray();
@@ -77,14 +81,18 @@ public class InvitationsHelper
         return (builder.ToImmutable(), mappings);
     }
 
-    public static async Task SaveInvitationResponse(Invitation invitation)
+    public static Task SaveInvitationResponse(Invitation invitation) => SaveInvitation(invitation, _fieldsToUpdateResponse);
+    
+    public static Task SaveInvitationMessageData(Invitation invitation) => SaveInvitation(invitation, _fieldsToUpdateWhatsapp);
+
+    private static async Task SaveInvitation(Invitation invitation, ImmutableArray<string> fieldsToUpdate)
     {
         var (invitations, mappings) = await GetInvitationsAndMappingsAsync();
         var currentInvitation = invitations.FirstOrDefault(i => i.Code == invitation.Code);
 
         var reverseMapping = mappings.ToImmutableDictionary(e => e.Value, e => e.Key);
         var request = new BatchUpdateRequest();
-        foreach (var fieldName in _fieldsToUpdate)
+        foreach (var fieldName in fieldsToUpdate)
         {
             var column = (char)(reverseMapping[fieldName] + 'A');
             var range = $"Invitades!{column}{currentInvitation.Row}";
