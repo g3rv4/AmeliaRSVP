@@ -45,15 +45,15 @@
     }
 
     <div class="pt-4">
-        El festejo es el <span class="text-2xl">9 de Enero a las 13 hs</span> en Samba 2, que queda en <span class="text-2xl">Edil Hugo Prato 2333<span></span></span> (<a href="https://goo.gl/maps/gaYYb7yDnFi2c64U7" target="_blank" class="text-black underline">ver en Google Maps</a>).
+        El festejo es el <span class="text-2xl">9 de Enero a las 13 hs</span> en Samba 2, que queda en <span class="text-2xl">Edil Hugo Prato 2333<span></span></span> (<a href="https://goo.gl/maps/gaYYb7yDnFi2c64U7" target="_blank" class="text-black underline font-bold">ver en Google Maps</a>).
     </div>
     <div class="pt-4">
-        Tenemos registrado que va@(pluralConfirmado ? "n" : "s") a venir @confirmation. Si necesit@(Model.Invitation.UsePlural ? "an" : "ás") cambiar la respuesta o actualizar las cantidades, @(Model.Invitation.UsePlural ? "pueden" : "podés") <a href="/@Model.Invitation.Code/update" class="text-black underline">hacer click acá</a>.
+        Tenemos registrado que va@(pluralConfirmado ? "n" : "s") a venir @confirmation. Si necesit@(Model.Invitation.UsePlural ? "an" : "ás") cambiar la respuesta o actualizar las cantidades, @(Model.Invitation.UsePlural ? "pueden" : "podés") <a href="/@Model.Invitation.Code/update" class="text-black underline  font-bold">hacer click acá</a>.
     </div>
 }
 else
 {
     <div class="pt-4">
-        Tenemos registrado que no va@(Model.Invitation.UsePlural ? "n" : "s") a venir :( Si necesit@(Model.Invitation.UsePlural ? "an" : "ás") cambiar la respuesta, @(Model.Invitation.UsePlural ? "pueden" : "podés") <a href="/@Model.Invitation.Code/update" class="text-black underline">hacer click acá</a>
+        Tenemos registrado que no va@(Model.Invitation.UsePlural ? "n" : "s") a venir :( Si necesit@(Model.Invitation.UsePlural ? "an" : "ás") cambiar la respuesta, @(Model.Invitation.UsePlural ? "pueden" : "podés") <a href="/@Model.Invitation.Code/update" class="text-black underline  font-bold">hacer click acá</a>
     </div>
 }

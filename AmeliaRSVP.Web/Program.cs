@@ -1,10 +1,23 @@
 using AmeliaRSVP.Core;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 Config.Init(builder.Configuration.GetValue<string>("CONFIG_PATH"));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders =
+        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+
+    // I don't want to know what the nginx ip is. Also: the container that runs this doesn't expose a port to the world
+    options.KnownNetworks.Clear();
+    options.KnownProxies.Clear();
+    
+    options.ForwardLimit = 1;
+});
 
 var app = builder.Build();
 
@@ -16,7 +29,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();

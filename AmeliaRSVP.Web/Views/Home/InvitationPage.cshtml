@@ -6,7 +6,7 @@
 
 <form method="post" action="/@Model.Invitation.Code">
     <div class="pt-4">
-        y lo vamos a festejar <span class="text-2xl">a las 13 hs</span> en Samba 2, que queda en <span class="text-2xl">Edil Hugo Prato 2333</span> (<a href="https://goo.gl/maps/gaYYb7yDnFi2c64U7" target="_blank" class="text-black underline">ver en Google Maps</a>)
+        y lo vamos a festejar <span class="text-2xl">a las 13 hs</span> en Samba 2, que queda en <span class="text-2xl">Edil Hugo Prato 2333</span> (<a href="https://goo.gl/maps/gaYYb7yDnFi2c64U7" target="_blank" class="text-black underline font-bold">ver en Google Maps</a>)
     </div>
     <div class="pt-4">
         <div class="inline-block relative w-full">
@@ -28,7 +28,7 @@
             <select name="@nameof(Model.ConfirmedAdults)" class="text-black block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                 @for (var i = 1; i <= Model.Invitation.MaxAdults; i++)
                 {
-                    <option value="@i">@i adulte@(i == 1 ? "" : "s")</option>
+                    <option value="@i" selected=@(i == Model.Invitation.MaxAdults)>@i adulte@(i == 1 ? "" : "s")</option>
                 }
             </select>
             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -46,7 +46,7 @@
                 <select name="@nameof(Model.ConfirmedKids)" class="text-black block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                     @for (var i = 0; i <= Model.Invitation.MaxKids; i++)
                     {
-                        <option value="@i">@i niñe@(i == 1 ? "" : "s")</option>
+                        <option value="@i" selected=@(i == Model.Invitation.MaxKids)>@i niñe@(i == 1 ? "" : "s")</option>
                     }
                 </select>
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -65,7 +65,7 @@
                 <select name="@nameof(Model.ConfirmedBabies)" class="text-black block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                     @for (var i = 0; i <= Model.Invitation.MaxBabies; i++)
                     {
-                        <option value="@i">@i bebé@(i == 1 ? "" : "s")</option>
+                        <option value="@i" selected=@(i == Model.Invitation.MaxBabies)>@i bebé@(i == 1 ? "" : "s")</option>
                     }
                 </select>
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
