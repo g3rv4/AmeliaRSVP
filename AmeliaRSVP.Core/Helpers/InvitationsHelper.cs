@@ -30,7 +30,7 @@ public class InvitationsHelper
     private static async Task<(ImmutableArray<Invitation>, ImmutableDictionary<int, string>)> GetInvitationsAndMappingsAsync()
     {
         var client = await GetClientAsync();
-        var res = await client.GetStringAsync(Config.Instance.SpreadsheetUrl + "/values/A:M");
+        var res = await client.GetStringAsync(Config.Instance.SpreadsheetUrl + "/values/Invitades!A:M");
         var data = JSON.Deserialize<SpreadsheetData>(res, Options.CamelCase);
 
         var builder = ImmutableArray.CreateBuilder<Invitation>();
@@ -78,7 +78,7 @@ public class InvitationsHelper
         foreach (var fieldName in _fieldsToUpdate)
         {
             var column = (char)(reverseMapping[fieldName] + 'A');
-            var range = $"{column}{currentInvitation.Row}";
+            var range = $"Invitades!{column}{currentInvitation.Row}";
             request.UpdateCell(range, _accessor[invitation, fieldName]?.ToString());
         }
 

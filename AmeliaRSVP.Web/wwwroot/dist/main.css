@@ -491,24 +491,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 14rem;
 }
 
-.max-w-7xl {
-  max-width: 80rem;
-}
-
-.max-w-5xl {
-  max-width: 64rem;
-}
-
-.max-w-2xl {
-  max-width: 42rem;
-}
-
 .max-w-xl {
   max-width: 36rem;
-}
-
-.max-w-lg {
-  max-width: 32rem;
 }
 
 .appearance-none {
