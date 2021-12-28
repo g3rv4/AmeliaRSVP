@@ -8,7 +8,16 @@ namespace AmeliaRSVP.Core.Helpers;
 
 public class InvitationsHelper
 {
-    private static readonly ImmutableArray<string> _fieldsToUpdate = new[] { nameof(Invitation.Response), nameof(Invitation.ConfirmedAdults), nameof(Invitation.ConfirmedKids), nameof(Invitation.ConfirmedBabies), nameof(Invitation.LastRSVP) }.ToImmutableArray();
+    private static readonly ImmutableArray<string> _fieldsToUpdate = new[]
+    {
+        nameof(Invitation.Response),
+        nameof(Invitation.ConfirmedAdults),
+        nameof(Invitation.ConfirmedKids),
+        nameof(Invitation.ConfirmedBabies),
+        nameof(Invitation.LastRSVP),
+        nameof(Invitation.WhatsAppNumbersDSent),
+        nameof(Invitation.WhatsAppNumbersGSent),
+    }.ToImmutableArray();
 
     private static Dictionary<string, Func<string, object>> _parserByField;
     private static readonly TypeAccessor _accessor = TypeAccessor.Create(typeof(Invitation));
@@ -30,7 +39,7 @@ public class InvitationsHelper
     private static async Task<(ImmutableArray<Invitation>, ImmutableDictionary<int, string>)> GetInvitationsAndMappingsAsync()
     {
         var client = await GetClientAsync();
-        var res = await client.GetStringAsync(Config.Instance.SpreadsheetUrl + "/values/Invitades!A:M");
+        var res = await client.GetStringAsync(Config.Instance.SpreadsheetUrl + "/values/Invitades!A:O");
         var data = JSON.Deserialize<SpreadsheetData>(res, Options.CamelCase);
 
         var builder = ImmutableArray.CreateBuilder<Invitation>();

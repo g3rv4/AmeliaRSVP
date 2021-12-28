@@ -15,6 +15,8 @@ public class Invitation
     public int? ConfirmedAdults { get; set; }
     public int? ConfirmedKids { get; set; }
     public int? ConfirmedBabies { get; set; }
+    public DateTime? WhatsAppNumbersGSent { get; set; }
+    public DateTime? WhatsAppNumbersDSent { get; set; }
 
     public bool UsePlural => MaxAdults + MaxBabies + MaxKids > 1;
 }
