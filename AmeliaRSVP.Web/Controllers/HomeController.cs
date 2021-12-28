@@ -28,7 +28,7 @@ public class HomeController : Controller
         return View();
     }
 
-    [Route("{*code}", Order = 1)]
+    [Route("{code}", Order = 1)]
     [HttpGet]
     public async Task<IActionResult> InvitationPage(string code)
     {
@@ -38,10 +38,29 @@ public class HomeController : Controller
             return NotFound();
         }
 
-        return View(new InvitationPage(invitation));
+        var model = new InvitationPage(invitation);
+        if (invitation.Response.HasValue)
+        {
+            return View("InvitationFilled", model);
+        }
+
+        return View(model);
+    }
+    
+    [Route("{code}/update", Order = 1)]
+    [HttpGet]
+    public async Task<IActionResult> InvitationPageUpdate(string code)
+    {
+        var invitations = await GetInvitationsAsync();
+        if (!invitations.TryGetValue(code, out var invitation))
+        {
+            return NotFound();
+        }
+
+        return View("InvitationPage", new InvitationPage(invitation));
     }
 
-    [Route("{*code}", Order = 1)]
+    [Route("{code}", Order = 1)]
     [HttpPost]
     public async Task<IActionResult> InvitationPageSubmit(InvitationPage model, string code)
     {
@@ -59,7 +78,8 @@ public class HomeController : Controller
         invitation.LastRSVP = DateTime.UtcNow;
 
         await InvitationsHelper.SaveInvitationResponse(invitation);
-        return Redirect(response ? "/woohooo" : "/booo");
+        _invitations = ImmutableDictionary<string, Invitation>.Empty;
+        return Redirect("/" + invitation.Code);
     }
 
     [Route("refresh")]

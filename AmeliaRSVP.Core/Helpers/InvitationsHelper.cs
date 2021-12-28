@@ -30,7 +30,7 @@ public class InvitationsHelper
     private static async Task<(ImmutableArray<Invitation>, ImmutableDictionary<int, string>)> GetInvitationsAndMappingsAsync()
     {
         var client = await GetClientAsync();
-        var res = await client.GetStringAsync(Config.Instance.SpreadsheetUrl + "/values/A:K");
+        var res = await client.GetStringAsync(Config.Instance.SpreadsheetUrl + "/values/A:M");
         var data = JSON.Deserialize<SpreadsheetData>(res, Options.CamelCase);
 
         var builder = ImmutableArray.CreateBuilder<Invitation>();
@@ -92,8 +92,14 @@ public class InvitationsHelper
         response.EnsureSuccessStatusCode();
     }
 
+    private static ImmutableArray<string> _ignoredFields = ImmutableArray.Create("Notes");
     private static void SetValue(Invitation invitation, string fieldName, string value)
     {
+        if (_ignoredFields.Contains(fieldName))
+        {
+            return;
+        }
+        
         if (_parserByField == null)
         {
             _parserByField = new Dictionary<string, Func<string, object>>();
