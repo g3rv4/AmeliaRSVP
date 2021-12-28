@@ -5,10 +5,10 @@
 }
 
 <form method="post" action="/@Model.Invitation.Code">
-    <div class="pt-4 js-show-when-unselected">
+    <div class="pt-4 lg:block js-show-mobile-when-unselected">
         y lo vamos a festejar <span class="text-2xl">a las 13 hs</span> en Samba 2, que queda en <span class="text-2xl">Edil Hugo Prato 2333</span> (<a href="https://goo.gl/maps/gaYYb7yDnFi2c64U7" target="_blank" class="text-black underline">ver en Google Maps</a>)
     </div>
-    <div class="pt-4 js-show-when-selected" style="display: none;">
+    <div class="pt-4 text-center hidden lg:hidden js-show-mobile-when-selected">
         y lo vamos a festejar <span class="text-2xl">a las 13 hs</span>
     </div>
     <div class="pt-4">
@@ -94,12 +94,14 @@
                 $('.js-show-when-ok').hide();
             }
             if (value) {
-                $('.js-show-when-unselected').hide();
+                $('.js-show-mobile-when-unselected').addClass("hidden");
+                $('.js-show-mobile-when-selected').removeClass("hidden");
                 $('.js-show-when-selected').show();
                 $('#invitacion').addClass('max-h-44');
             } else {
                 $('.js-show-when-selected').hide();
-                $('.js-show-when-unselected').show();
+                $('.js-show-mobile-when-unselected').removeClass("hidden");
+                $('.js-show-mobile-when-selected').addClass("hidden");
                 $('#invitacion').removeClass('max-h-44');
             }
         });
