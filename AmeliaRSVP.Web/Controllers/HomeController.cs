@@ -2,6 +2,7 @@
 using AmeliaRSVP.Core.Helpers;
 using AmeliaRSVP.Core.Model;
 using AmeliaRSVP.Web.Models;
+using AmeliaRSVP.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AmeliaRSVP.Web.Controllers;
@@ -62,7 +63,7 @@ public class HomeController : Controller
 
     [Route("{code}", Order = 1)]
     [HttpPost]
-    public async Task<IActionResult> InvitationPageSubmit(InvitationPage model, string code)
+    public async Task<IActionResult> InvitationPageSubmit(InvitationPage model, string code, [FromServices] IBackgroundTaskQueue taskQueue)
     {
         var invitations = await GetInvitationsAsync();
         if (!invitations.TryGetValue(code, out var invitation))
@@ -79,6 +80,16 @@ public class HomeController : Controller
 
         await InvitationsHelper.SaveInvitationResponse(invitation);
         _invitations = ImmutableDictionary<string, Invitation>.Empty;
+
+        var subject = $"{invitation.Name} confirmaron que vienen!";
+        var body = "wiiii!";
+        if (!response)
+        {
+            subject = $"{invitation.Name} confirmaron que no vienen :(";
+            body = "boooo";
+        }
+
+        await taskQueue.QueueBackgroundWorkItemAsync(_ => SendgridHelper.SendEmail(subject, body));
         return Redirect("/" + invitation.Code);
     }
 
