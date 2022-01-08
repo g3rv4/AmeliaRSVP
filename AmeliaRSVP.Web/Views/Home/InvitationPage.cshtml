@@ -13,7 +13,7 @@
     </div>
     <div class="pt-4">
         <div class="inline-block relative w-full">
-            <select name="@nameof(Model.RSVPResponse)" class="js-response-field text-black block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+            <select name="@nameof(Model.RSVPResponse)" id="js-response-field" class="js-response-field text-black block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                 <option value="">Va@(Model.Invitation.UsePlural ? "n" : "s") a venir al cumpleaños?</option>
                 <option value="True">Si! @(Model.Invitation.UsePlural ? "vamos" : "voy") a ir!</option>
                 <option value="False">No, no @(Model.Invitation.UsePlural ? "vamos" : "voy") a poder ir :(</option>
@@ -85,26 +85,34 @@
 @section Javascript
 {
     <script type="text/javascript">
+    function responseFieldChanged() {
+        var value = $('#js-response-field').val(); 
+        if (value === "True") {
+            $('.js-show-when-ok').show();
+        } else {
+            $('.js-show-when-ok').hide();
+        }
+        if (value) {
+            $('.js-show-mobile-when-unselected').addClass("hidden");
+            $('.js-show-mobile-when-selected').removeClass("hidden");
+            $('.js-show-when-selected').show();
+            $('#invitacion').addClass('max-h-44');
+        } else {
+            $('.js-show-when-selected').hide();
+            $('.js-show-mobile-when-unselected').removeClass("hidden");
+            $('.js-show-mobile-when-selected').addClass("hidden");
+            $('#invitacion').removeClass('max-h-44');
+        }
+    }
     $(document).ready(function() {
-        $('.js-response-field').change(function (){
-            var value = $(this).val(); 
-            if (value === "True") {
-                $('.js-show-when-ok').show();
-            } else {
-                $('.js-show-when-ok').hide();
-            }
-            if (value) {
-                $('.js-show-mobile-when-unselected').addClass("hidden");
-                $('.js-show-mobile-when-selected').removeClass("hidden");
-                $('.js-show-when-selected').show();
-                $('#invitacion').addClass('max-h-44');
-            } else {
-                $('.js-show-when-selected').hide();
-                $('.js-show-mobile-when-unselected').removeClass("hidden");
-                $('.js-show-mobile-when-selected').addClass("hidden");
-                $('#invitacion').removeClass('max-h-44');
-            }
-        });
+        $('.js-response-field').change(responseFieldChanged);
+        @if (Model.RSVPResponse.HasValue)
+        {
+            <text>
+                $('#js-response-field').val('@(Model.RSVPResponse == true ? "True" : "False")');
+                responseFieldChanged();
+            </Text>
+        }
     });
     </script>
 }

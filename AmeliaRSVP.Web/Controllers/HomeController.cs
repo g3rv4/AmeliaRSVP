@@ -60,6 +60,21 @@ public class HomeController : Controller
 
         return View("InvitationPage", new InvitationPage(invitation));
     }
+    
+    [Route("{code}/cancel", Order = 1)]
+    [HttpGet]
+    public async Task<IActionResult> InvitationPageCancel(string code)
+    {
+        var invitations = await GetInvitationsAsync();
+        if (!invitations.TryGetValue(code, out var invitation))
+        {
+            return NotFound();
+        }
+
+        var model = new InvitationPage(invitation);
+        model.RSVPResponse = false;
+        return View("InvitationPage", model);
+    }
 
     [Route("{code}", Order = 1)]
     [HttpPost]
