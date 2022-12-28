@@ -25,5 +25,15 @@ public class Invitation
     public DateTime? WhatsAppNumbersGSent { get; set; }
     public DateTime? WhatsAppNumbersDSent { get; set; }
 
-    public bool UsePlural => MaxAdults + MaxBabies + MaxKids > 1;
+    public bool UsePlural
+    {
+        get
+        {
+            if (FromDaycare && MaxKids == 1)
+            {
+                return false;
+            }
+            return MaxAdults + MaxBabies + MaxKids > 1;
+        }
+    }
 }

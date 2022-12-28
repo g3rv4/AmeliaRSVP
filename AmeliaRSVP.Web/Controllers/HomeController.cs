@@ -102,12 +102,18 @@ public class HomeController : Controller
         await InvitationsHelper.SaveInvitationResponse(invitation);
         _invitations = ImmutableDictionary<string, Invitation>.Empty;
 
-        var subject = $"{invitation.Name} confirmaron que vienen!";
+        var subject = $"{invitation.NameToUse} confirmaron que vienen!";
         var body = "wiiii!";
         if (!response)
         {
-            subject = $"{invitation.Name} confirmaron que no vienen :(";
+            subject = $"{invitation.NameToUse} confirmaron que no vienen :(";
             body = "boooo";
+        }
+
+        if (!invitation.UsePlural)
+        {
+            subject = subject.Replace("confirmaron", "confirmó")
+                .Replace("vienen", "viene");
         }
 
         await taskQueue.QueueBackgroundWorkItemAsync(_ => SendgridHelper.SendEmail(subject, body));
