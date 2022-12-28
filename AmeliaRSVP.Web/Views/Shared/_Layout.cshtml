@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Amelia cumple 3!</title>
+    <title>Amelia cumple 4!</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/dist/main.css?7" rel="stylesheet">
@@ -13,15 +13,15 @@
 
 <div class="lg:flex lg:h-screen h-max">
     <div class="lg:m-auto">
-        <div style="background-color: rgb(212, 7, 7); color: rgb(255, 217, 0);" class="px-4 py-4 max-w-xl">
+        <div style="background-color: #fdf0d9;" class="px-4 py-4 max-w-xl">
             @if (IsSectionDefined("Title"))
             {
                 <div class="text-center text-3xl pb-4">
                     @RenderSection("Title")
                 </div>
             }
-            <img src="/invita.png" class="lg:max-h-96 m-auto" id="invitacion"/>
-            <div style="background-color: rgb(212, 7, 7); color: rgb(255, 217, 0)">
+            <img src="/invitacion.png" class="lg:max-h-96 m-auto" style="margin-top: -80px;" id="invitacion"/>
+            <div>
                 @RenderBody()
             </div>
         </div>

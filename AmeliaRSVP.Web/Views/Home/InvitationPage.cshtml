@@ -1,15 +1,15 @@
 @model InvitationPage
 
 @section Title {
-    <text>Hola @Model.Invitation.Name! el 9 de Enero...</text>
+    <text style="position: relative">Hola @Model.Invitation.NameToUse!</text>
 }
 
-<form method="post" action="/@Model.Invitation.Code">
+<form method="post" action="/@Model.Invitation.Code" class="js-form">
     <div class="pt-4 lg:block js-show-mobile-when-unselected">
-        y lo vamos a festejar <span class="text-2xl">a las 13 hs</span> en Samba 2, que queda en <span class="text-2xl">Edil Hugo Prato 2333</span> (<a href="https://goo.gl/maps/gaYYb7yDnFi2c64U7" target="_blank" class="text-black underline">ver en Google Maps</a>)
+        y lo festejamos <span class="text-2xl">el 8 de Enero a las 12:00 hs</span> en Punto y Coma, que queda en <span class="text-2xl">Eduardo Acevedo 1034</span> (<a href="https://goo.gl/maps/1gV7F8rdwwf3e5Tf7" target="_blank" class="underline">ver en Google Maps</a>)
     </div>
     <div class="pt-4 text-center hidden lg:hidden js-show-mobile-when-selected">
-        y lo vamos a festejar <span class="text-2xl">a las 13 hs</span>
+        y lo vamos a festejar <span class="text-2xl">el 8 de Enero<br />a las 12:00 hs</span>
     </div>
     <div class="pt-4">
         <div class="inline-block relative w-full">
@@ -23,33 +23,36 @@
             </div>
         </div>
     </div>
-    <div style="display: none;" class="js-show-when-ok pt-4">
-        <div class="relative w-56 hidden lg:inline-block">
-            Cuantos adultes van a venir?
-        </div>
-        <div class="inline-block relative w-full lg:w-64">
-            <select name="@nameof(Model.ConfirmedAdults)" class="text-black block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                @for (var i = 1; i <= Model.Invitation.MaxAdults; i++)
-                {
-                    <option value="@i" selected=@(i == Model.Invitation.MaxAdults)>@i adulte@(i == 1 ? "" : "s")</option>
-                }
-            </select>
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+    @if (Model.Invitation.MaxAdults > 0)
+    {
+        <div style="display: none;" class="js-show-when-ok pt-4">
+            <div class="relative w-56 hidden lg:inline-block">
+                Cuantos adultos van a venir?
+            </div>
+            <div class="inline-block relative w-full lg:w-64">
+                <select name="@nameof(Model.ConfirmedAdults)" class="text-black block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                    @for (var i = 0; i <= Model.Invitation.MaxAdults; i++)
+                    {
+                        <option value="@i" selected=@(i == Model.Invitation.MaxAdults)>@i adulto@(i == 1 ? "" : "s")</option>
+                    }
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                </div>
             </div>
         </div>
-    </div>
+    }
     @if (Model.Invitation.MaxKids > 0)
     {
         <div style="display: none;" class="js-show-when-ok pt-4">
             <div class="relative w-56 hidden lg:inline-block">
-                Cuantos niñes van a venir?
+                Cuantos niños van a venir?
             </div>
             <div class="inline-block relative w-full lg:w-64">
                 <select name="@nameof(Model.ConfirmedKids)" class="text-black block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                     @for (var i = 0; i <= Model.Invitation.MaxKids; i++)
                     {
-                        <option value="@i" selected=@(i == Model.Invitation.MaxKids)>@i niñe@(i == 1 ? "" : "s")</option>
+                        <option value="@i" selected=@(i == Model.Invitation.MaxKids)>@i niño@(i == 1 ? "" : "s")</option>
                     }
                 </select>
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -96,12 +99,12 @@
             $('.js-show-mobile-when-unselected').addClass("hidden");
             $('.js-show-mobile-when-selected').removeClass("hidden");
             $('.js-show-when-selected').show();
-            $('#invitacion').addClass('max-h-44');
+            $('#invitacion').addClass('max-h-72');
         } else {
             $('.js-show-when-selected').hide();
             $('.js-show-mobile-when-unselected').removeClass("hidden");
             $('.js-show-mobile-when-selected').addClass("hidden");
-            $('#invitacion').removeClass('max-h-44');
+            $('#invitacion').removeClass('max-h-72');
         }
     }
     $(document).ready(function() {

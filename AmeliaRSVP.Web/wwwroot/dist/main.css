@@ -487,8 +487,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: max-content;
 }
 
-.max-h-44 {
-  max-height: 11rem;
+.max-h-72 {
+  max-height: 18rem;
 }
 
 .w-full {
@@ -631,13 +631,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 body {
   font-family: 'Londrina Solid', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  background-color: rgb(212, 7, 7);
+  background-color: #fdf0d9;
+  color: #5ea696;
 }
 
 @media (min-width: 1024px) {
   body {
-    background-color: white;
+    background-color: #fdf0d9;
   }
+}
+
+a, a:active, a:visited, a:hover {
+  color: #E8783D;
 }
 
 .hover\:border-gray-500:hover {

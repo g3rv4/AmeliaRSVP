@@ -43,7 +43,7 @@ public class InvitationsHelper
     private static async Task<(ImmutableArray<Invitation>, ImmutableDictionary<int, string>)> GetInvitationsAndMappingsAsync()
     {
         var client = await GetClientAsync();
-        var res = await client.GetStringAsync(Config.Instance.SpreadsheetUrl + "/values/Invitades!A:O");
+        var res = await client.GetStringAsync(Config.Instance.SpreadsheetUrl + "/values/Invitades!A:S");
         var data = JSON.Deserialize<SpreadsheetData>(res, Options.CamelCase);
 
         var builder = ImmutableArray.CreateBuilder<Invitation>();

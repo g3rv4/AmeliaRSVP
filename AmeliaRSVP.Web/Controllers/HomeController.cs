@@ -87,11 +87,17 @@ public class HomeController : Controller
         }
 
         var response = model.RSVPResponse ?? false;
-        invitation.Response = response;
         invitation.ConfirmedAdults = response ? Math.Min(invitation.MaxAdults, model.ConfirmedAdults ?? 0) : 0;
         invitation.ConfirmedKids = response ? Math.Min(invitation.MaxKids, model.ConfirmedKids ?? 0) : 0;
         invitation.ConfirmedBabies = response ? Math.Min(invitation.MaxBabies, model.ConfirmedBabies ?? 0) : 0;
         invitation.LastRSVP = DateTime.UtcNow;
+
+        if (response && invitation.ConfirmedAdults + invitation.ConfirmedKids + invitation.ConfirmedBabies == 0)
+        {
+            response = false;
+        }
+        
+        invitation.Response = response;
 
         await InvitationsHelper.SaveInvitationResponse(invitation);
         _invitations = ImmutableDictionary<string, Invitation>.Empty;
