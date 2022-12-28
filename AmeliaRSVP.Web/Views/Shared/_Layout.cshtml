@@ -20,7 +20,14 @@
                     @RenderSection("Title")
                 </div>
             }
-            <img src="/invitacion.png" class="lg:max-h-96 m-auto" style="margin-top: -80px;" id="invitacion"/>
+            @if (IsSectionDefined("Invite"))
+            {
+                @RenderSection("Invite")
+            }
+            else
+            {
+                <img src="/invitacion.png" class="lg:max-h-96 m-auto" style="margin-top: -80px; margin-bottom: -30px;" id="invitacion"/>
+            }
             <div>
                 @RenderBody()
             </div>
